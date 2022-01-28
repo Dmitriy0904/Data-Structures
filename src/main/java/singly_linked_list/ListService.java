@@ -65,6 +65,12 @@ public class ListService implements ServiceOperations{
 
     @Override
     public void printListRecursively(Node top) {
+        if(top == null){
+            System.out.print("\n");
+            return;
+        }
+        System.out.print(top.info + " ");
+        printListRecursively(top.next);
     }
 
 

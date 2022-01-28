@@ -28,9 +28,9 @@ public class Controller {
         }
         print();
         while (true) {
-            System.out.println("What do you want to do:\n1-Delete item\n2-Add element BEFORE\n3-Add element AFTER" +
-                    "\n4-Show all elements of a sequence\n5-Is the list sorted in ascending order?\n" +
-                    "6-Is the list sorted in descending order?\n8-Exit");
+            System.out.println("What do you want to do:\n1-Delete item;\n2-Add element BEFORE;\n3-Add element AFTER;" +
+                    "\n4-Show all elements of a sequence;\n5-Is the list sorted in ascending order?\n" +
+                    "6-Is the list sorted in descending order?\n7-Print list recursively;\n8-Exit;");
             choose = scanner.nextInt();
             switch (choose) {
                 case 1 -> {
@@ -51,7 +51,7 @@ public class Controller {
                 case 4 -> print();
                 case 5 -> isAsc();
                 case 6 -> isDesc();
-                case 7 -> serviceOperations.printListRecursively(head);
+                case 7 -> printRecursively();
                 case 8 -> System.exit(1);
             }
         }
@@ -61,6 +61,9 @@ public class Controller {
         serviceOperations.printList(head);
     }
 
+    private void printRecursively(){
+        serviceOperations.printListRecursively(head);
+    }
 
     private void removeElement() {
         System.out.println("Enter the number you want to remove:");
