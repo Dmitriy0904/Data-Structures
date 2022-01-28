@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Node top = fifo();
-        printList(top);
+        /*Controller controller = new Controller();
+        controller.userInterface();*/
     }
 
 
-    public static void printList(Node top){
+    /*public static void printList(Node top){
         while(top != null){
             System.out.print(top.info + " ");
             top = top.next;
@@ -57,7 +57,7 @@ public class Main {
         }
         cur.next = null;
         return top;
-    }
+    }*/
 
 }
 
