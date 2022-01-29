@@ -2,10 +2,10 @@ package singly_linked_list;
 
 import java.util.Scanner;
 
-public class ListService implements ServiceOperations{
+public class ListService implements ServiceOperations {
     private Scanner scanner;
 
-    public ListService(){
+    public ListService() {
         scanner = new Scanner(System.in);
     }
 
@@ -16,7 +16,7 @@ public class ListService implements ServiceOperations{
         Node cur;       //current
         Node top = null;    //top
         info = scanner.nextInt();
-        while (info != 0){
+        while (info != 0) {
             cur = new Node();
             cur.info = info;        //cur.setInfo(info)
             cur.next = top;
@@ -31,13 +31,13 @@ public class ListService implements ServiceOperations{
     public Node createFifo() {
         Node top = null, cur;
         int num = scanner.nextInt();
-        if(num != 0){
+        if (num != 0) {
             top = new Node();
             top.info = num;
             top.next = null;
             cur = top;
             num = scanner.nextInt();
-            while(num != 0){
+            while (num != 0) {
                 cur.next = new Node();
                 cur = cur.next;
                 cur.info = num;
@@ -51,11 +51,11 @@ public class ListService implements ServiceOperations{
 
     @Override
     public void printList(Node top) {
-        if(top == null){
+        if (top == null) {
             System.out.println("The list is empty.");
             return;
         }
-        while(top != null){
+        while (top != null) {
             System.out.print(top.info + " ");
             top = top.next;
         }
@@ -65,8 +65,8 @@ public class ListService implements ServiceOperations{
 
     @Override
     public void printListRecursively(Node top) {
-        if(top == null){
-            System.out.print("\n");
+        if (top == null) {
+            System.out.print("\n"); //TODO через тернарный оператор в одну строку.
             return;
         }
         System.out.print(top.info + " ");
@@ -78,10 +78,10 @@ public class ListService implements ServiceOperations{
     public Node remove(Node top, int toDelete) {
         Node cur;
         Node prev;
-        if(top == null){
-            return null;
+        if (top == null) {
+            throw new IllegalArgumentException("Can't delete, list is empty.");
         }
-        if(toDelete == top.info){
+        if (toDelete == top.info) { //Если ввести 1, 0
             cur = top;
             top = top.next;
             cur = null;
@@ -89,8 +89,8 @@ public class ListService implements ServiceOperations{
         }
         prev = top;
         cur = top.next;
-        while(cur != null){
-            if(cur.info == toDelete){
+        while (cur != null) {
+            if (cur.info == toDelete) {
                 prev.next = cur.next;
                 cur = null;
                 return top;
@@ -98,8 +98,9 @@ public class ListService implements ServiceOperations{
             prev = cur;
             cur = cur.next;
         }
-        return null;
+        throw new IllegalArgumentException("You entered the number that isn't in the list.");
     }
+
 
     @Override
     public Node insertBefore(Node top, int toAdd, int before) {
@@ -107,13 +108,13 @@ public class ListService implements ServiceOperations{
         Node prev = top;
         Node additional = new Node();
         additional.info = toAdd;
-        if(top.info == before){
+        if (top.info == before) {
             top = additional;
             top.next = prev;
             return top;
         }
-        while(cur != null){
-            if(cur.info == before) {
+        while (cur != null) {
+            if (cur.info == before) {
                 prev.next = additional;
                 additional.next = cur;
                 return top;
@@ -121,9 +122,8 @@ public class ListService implements ServiceOperations{
             prev = cur;
             cur = cur.next;
         }
-        System.out.println("There is no such number (" + before +
+        throw new IllegalArgumentException("There is no such number (" + before +
                 ") in the sequence before which you want to put a number " + toAdd);
-        return top;
     }
 
 
@@ -133,8 +133,8 @@ public class ListService implements ServiceOperations{
         Node prev = top;
         Node additional = new Node();
         additional.info = toAdd;
-        while(cur != null){ // Block, if you need to insert an element somewhere inside the sequence
-            if(prev.info == after) {
+        while (cur != null) { // Block, if you need to insert an element somewhere inside the sequence
+            if (prev.info == after) {
                 prev.next = additional;
                 additional.next = cur;
                 return top;
@@ -142,22 +142,23 @@ public class ListService implements ServiceOperations{
             prev = cur;
             cur = cur.next;
         }
-        if(prev.info == after){ // Checking if an element needs to be added at the very end (after the last number in the sequence)
+        if (prev.info == after) { // Checking if an element needs to be added at the very end (after the last number in the sequence)
             prev.next = additional;
+            additional.next = null;
             return top;
         }
         //If you do not find a number in the sequence, after which you need to add another element, then it displays a message and the original list.
-        System.out.println("There is no such number (" + after +
+        throw new IllegalArgumentException("There is no such number (" + after +
                 ") in the sequence after which you want to put a number " + toAdd);
-        return top;
     }
 
+
     @Override
-    public boolean isOrderedAscending(Node top){
+    public boolean isOrderedAscending(Node top) {
         Node cur = top.next;
         Node prev = top;
-        while (cur != null){
-            if(cur.info < prev.info){
+        while (cur != null) {
+            if (cur.info < prev.info) {
                 return false;
             }
             prev = cur;
@@ -166,12 +167,13 @@ public class ListService implements ServiceOperations{
         return true;
     }
 
+
     @Override
-    public boolean isOrderedDescending(Node top){
+    public boolean isOrderedDescending(Node top) {
         Node cur = top.next;
         Node prev = top;
-        while (cur != null){
-            if(cur.info > prev.info){
+        while (cur != null) {
+            if (cur.info > prev.info) {
                 return false;
             }
             prev = cur;
@@ -183,13 +185,13 @@ public class ListService implements ServiceOperations{
 
     @Override
     //Remove all negative elements from the list
-    public Node deleteNegative(Node top){
+    public Node deleteNegative(Node top) {
         Node cur = top;
         Node prev;
-        if(top == null){
+        if (top == null) {
             throw new IllegalArgumentException("Can't delete, list is empty.");
         }
-        if(cur.info < 0){
+        if (cur.info < 0) {
             cur = top;
             top = top.next;
             cur = null;
@@ -197,20 +199,17 @@ public class ListService implements ServiceOperations{
         }
         prev = top;
         cur = top.next;
-        while(cur != null){
-            if(cur.info < 0){
+        while (cur != null) {
+            if (cur.info < 0) {
                 prev.next = cur.next;
                 cur = null;
                 cur = prev;
                 cur = cur.next;
-                //TODO cur = prev.next;
-            }
-            else{
+            } else {
                 prev = cur;
                 cur = cur.next;
             }
         }
         return top;
     }
-
 }
