@@ -1,4 +1,5 @@
 package singly_linked_list;
+
 import java.util.Scanner;
 
 
@@ -7,10 +8,12 @@ public class Controller {
     private ServiceOperations serviceOperations;
     private Node head;
 
+
     public Controller() {
         scanner = new Scanner(System.in);
         serviceOperations = new ListService();
     }
+
 
     public void userInterface() {
         int choose;
@@ -28,53 +31,59 @@ public class Controller {
         }
         print();
         while (true) {
-            System.out.println("What do you want to do:\n1-Delete item;\n2-Add element BEFORE;\n3-Add element AFTER;" +
-                    "\n4-Show all elements of a sequence;\n5-Is the list sorted in ascending order?\n" +
-                    "6-Is the list sorted in descending order?\n7-Print list recursively;\n8-Exit;");
+            System.out.println("What do you want to do:\n1-Create new FIFO list;\n2-Create new LIFO list;\n" +
+                    "3-Delete item;\n4-Add element BEFORE;\n5-Add element AFTER;" +
+                    "\n6-Show all elements of a sequence;\n7-Is the list sorted in ascending order?\n" +
+                    "8-Is the list sorted in descending order?\n9-Print list recursively;\n10-Exit;");
             choose = scanner.nextInt();
             switch (choose) {
                 case 1 -> {
-                    print();
-                    removeElement();
+                    createNewFifo();
                     print();
                 }
                 case 2 -> {
-                    print();
-                    before();
+                    createNewLifo();
                     print();
                 }
                 case 3 -> {
                     print();
-                    after();
+                    removeElement();
                     print();
                 }
-                case 4 -> print();
-                case 5 -> isAsc();
-                case 6 -> isDesc();
-                case 7 -> printRecursively();
-                case 8 -> System.exit(1);
+                case 4 -> {
+                    print();
+                    before();
+                }
+                case 5 -> {
+                    print();
+                    after();
+                }
+                case 6 -> print();
+                case 7 -> isAsc();
+                case 8 -> isDesc();
+                case 9 -> printRecursively();
+                case 10 -> System.exit(1);
             }
         }
     }
+
 
     private void print() {
         serviceOperations.printList(head);
     }
 
-    private void printRecursively(){
+
+    private void printRecursively() {
         serviceOperations.printListRecursively(head);
     }
+
 
     private void removeElement() {
         System.out.println("Enter the number you want to remove:");
         int toDelete = scanner.nextInt();
-        if (serviceOperations.remove(head, toDelete) == null) {
-            System.out.println("There is no such number (" + toDelete +
-                    ") in the sequence that you want to remove " +
-                    "or the list was initially empty.");
-            return;
+        if (serviceOperations.remove(head, toDelete) != null) {
+            System.out.println("Item successfully deleted.");
         }
-        System.out.println("Item successfully deleted.");
     }
 
 
@@ -111,5 +120,17 @@ public class Controller {
             return;
         }
         System.out.println("List sorted in descending order.");
+    }
+
+
+    private void createNewFifo() {
+        System.out.println("Enter a sequence of numbers: (input ending - number 0)");
+        head = serviceOperations.createFifo();
+    }
+
+
+    private void createNewLifo() {
+        System.out.println("Enter a sequence of numbers: (input ending - number 0)");
+        head = serviceOperations.createLifo();
     }
 }
