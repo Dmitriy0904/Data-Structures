@@ -21,23 +21,16 @@ public class Controller {
                     "7-Is the list symmetrical?\n8-List to array\n0-Exit;");
             choose = scanner.nextInt();
             switch (choose) {
-                case 1 -> {
-                    createNewList(head);
-                }
-                case 2 -> {
-                    removeElement(head);
-                }
-                case 3 -> {
-                    before(head);
-                }
-                case 4 -> {
-                    after(head);
-                }
+                case 1 -> head = createNewList(head);
+                case 2 -> head = removeElement(head);
+                case 3 -> head = before(head);
+                case 4 -> head = after(head);
                 case 5 -> print(head);
                 case 6 -> length(head);
                 case 7 -> isSymmetric(head);
                 case 8 -> toArray(head);
                 case 0 -> System.exit(1);
+                default -> System.out.println("Unknown operation.");
             }
         }
     }
@@ -47,52 +40,50 @@ public class Controller {
     }
 
 
-    private void removeElement(Node head) { //should be remade
+    private Node removeElement(Node head) {
         if (head == null) {
             System.out.println("Firstly create a list.");
-            return;
+            return null;
         }
         print(head);
         System.out.println("Enter the number you want to remove:");
         int toDelete = scanner.nextInt();
-        head = service.remove(head, toDelete);
-        print(head);
+        return service.remove(head, toDelete);
     }
 
 
-    private void before(Node head) {
+    private Node before(Node head) {
         if (head == null) {
             System.out.println("Firstly create a list.");
-            return;
+            return null;
         }
         print(head);
         System.out.println("Enter the number you want to add:");
         int toAdd = scanner.nextInt();
         System.out.println("Enter the number you want to insert your number before:");
         int before = scanner.nextInt();
-        head = service.insertBefore(head, toAdd, before);
-        print(head);
+        return service.insertBefore(head, toAdd, before);
     }
 
 
-    private void after(Node head) {
+    private Node after(Node head) {
         if (head == null) {
             System.out.println("Firstly create a list.");
-            return;
+            return null;
         }
         print(head);
         System.out.println("Enter the number you want to add:");
         int toAdd = scanner.nextInt();
         System.out.println("Enter the number after which you want to insert your number:");
         int after = scanner.nextInt();
-        head = service.insertAfter(head, toAdd, after);
-        print(head);
+        return service.insertAfter(head, toAdd, after);
     }
 
 
-    private void createNewList(Node head) {
+    private Node createNewList(Node head) {
+        head = service.clear(head);
         System.out.println("Enter a sequence of numbers: (input ending - number 0)");
-        head = service.createList();
+        return service.createList();
     }
 
     private void length(Node head) {

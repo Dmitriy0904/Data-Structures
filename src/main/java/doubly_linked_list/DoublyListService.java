@@ -190,4 +190,16 @@ public class DoublyListService {
         }
         return arr;
     }
+
+    public Node clear(Node top) {
+        Node cur;
+        while (top.next != null) {
+            cur = top;
+            top = top.next;
+            cur = null;
+            top.prev = null;
+        }
+        top = null;
+        return top;
+    }
 }
