@@ -11,4 +11,5 @@ public interface ServiceOperations {
     boolean isOrderedAscending(Node top);
     boolean isOrderedDescending(Node top);
     void printListRecursively(Node top);
+    Node clear(Node top);
 }
