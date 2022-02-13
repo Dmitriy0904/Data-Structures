@@ -1,6 +1,6 @@
-package singly_linked_list_tasks;
+package singly_linked_list;
 
-public class Service {
+public class Tasks {
 
     public Node remove(Node top, int toDelete) {
         Node cur;
@@ -28,6 +28,7 @@ public class Service {
         throw new IllegalArgumentException("You entered the number that isn't in the list.");
     }
 
+    //replace N to M
     public Node replacement(Node top, int to, int from) {
         Node cur = top;
         if (top == null) {
@@ -43,6 +44,7 @@ public class Service {
         return top;
     }
 
+    //get length of the list
     public int getLength(Node top) {
         int length = 0;
         while (top != null) {
@@ -52,7 +54,7 @@ public class Service {
         return length;
     }
 
-
+    //checking two lists for equality
     public boolean compare(Node firstTop, Node secondTop) {
         Node firstCur = firstTop, secondCur = secondTop;
         if (getLength(firstTop) != getLength(secondTop)) {
@@ -69,6 +71,7 @@ public class Service {
     }
 
 
+    //remove all elements from the list that are less than middle arithmetic
     public Node removeAllElements(Node top) {
         int sum = 0, length = getLength(top);
         Node cur = top;
@@ -90,7 +93,7 @@ public class Service {
         return top;
     }
 
-
+    //double each occurrence of the element E in the list
     public Node doubleElementOccurrence(Node top, int num) {
         Node cur = top.next;
         Node prev = top;
