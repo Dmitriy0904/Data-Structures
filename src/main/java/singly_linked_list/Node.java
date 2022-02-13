@@ -28,38 +28,3 @@ public class Node {
         this.next = next;
     }
 }
-
-
-
-
-
-
-
-/*
-struct node{
-    int info;      float/double/struct
-    node *next;
-} typedef node * pnode;
- */
-
-
-// node -> node -> node -> node
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

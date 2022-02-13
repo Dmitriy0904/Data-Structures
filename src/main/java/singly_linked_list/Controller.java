@@ -46,8 +46,8 @@ public class Controller {
                 case 7 -> isAsc(head);
                 case 8 -> isDesc(head);
                 case 9 -> printRecursively(head);
-                default -> System.out.println("Unknown operation.");
                 case 10 -> System.exit(1);
+                default -> System.out.println("Unknown operation.");
             }
         }
     }
